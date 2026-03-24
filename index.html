@@ -5,10 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>appalachian brook trout</title>
     <style>
-        /* standard reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        /* the void */
         body, html {
             background-color: #050505 !important;
             color: #d9d0c1;
@@ -21,20 +18,21 @@
             overflow: hidden;
         }
 
-        /* the actual gate box */
+        /* the gate: making the border and shadow thicker */
         .gate {
             position: relative;
             max-width: 500px;
             width: 85%;
-            padding: 60px 40px;
-            background: radial-gradient(circle at top, #0b0f0a 0%, #050505 80%);
-            border: 1px solid #2f3621;
-            box-shadow: 0 0 50px rgba(0,0,0,0.9), inset 0 0 30px rgba(0,0,0,0.8);
+            padding: 80px 40px;
+            background: #050505;
+            border: 2px solid #2f3621; /* slightly thicker */
+            box-shadow: 0 0 80px rgba(0,0,0,1), inset 0 0 60px rgba(0,0,0,1);
             text-align: center;
             z-index: 10;
+            overflow: hidden;
         }
 
-        /* the fog (fixed animation) */
+        /* the fog: i made this MUCH more visible */
         .fog-overlay {
             content: "";
             position: absolute;
@@ -42,67 +40,68 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 50%);
-            animation: fogMove 20s linear infinite;
+            /* brighter white-grey for the mist */
+            background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 40%),
+                        radial-gradient(circle, rgba(255,255,255,0.05) 10%, transparent 60%);
+            animation: fogMove 12s ease-in-out infinite; /* faster and move-y-er */
             pointer-events: none;
             z-index: -1;
+            filter: blur(20px);
         }
 
         @keyframes fogMove {
-            0% { transform: translate(0, 0); }
-            50% { transform: translate(-5%, 5%); }
-            100% { transform: translate(0, 0); }
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(-5%, 10%) scale(1.1); }
+            66% { transform: translate(10%, -5%) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
         }
 
         h1 {
-            font-size: 24px;
-            letter-spacing: 6px;
+            font-size: 28px;
+            letter-spacing: 8px;
+            line-height: 1.5;
+            margin-bottom: 50px;
             text-transform: lowercase;
-            margin-bottom: 40px;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
-        /* button vibes */
         .enter-btn {
             background: transparent;
             border: 1px solid #4a1c1c;
             color: #d9d0c1;
-            padding: 15px 35px;
-            font-size: 10px;
-            letter-spacing: 4px;
+            padding: 18px 40px;
+            font-size: 11px;
+            letter-spacing: 5px;
             text-transform: uppercase;
             cursor: pointer;
-            transition: 0.5s;
+            transition: 0.6s;
+            outline: none;
         }
         .enter-btn:hover {
             background: #4a1c1c;
             color: #000;
         }
 
-        /* hidden archive */
         #archive {
             display: none;
-            margin-top: 40px;
-            animation: fadeIn 2s ease-in;
+            margin-top: 50px;
+            animation: fadeIn 3s ease-in;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .haunted-link {
             display: block;
-            margin: 20px 0;
+            margin: 25px 0;
             color: #d9d0c1;
             text-decoration: none;
-            font-size: 16px;
+            font-size: 18px;
             opacity: 0.6;
-            transition: 0.4s;
+            transition: 0.5s;
         }
         .haunted-link:hover {
             opacity: 1;
             color: #7c0a0a;
-            letter-spacing: 5px;
+            letter-spacing: 6px;
         }
 
         #yt-player { position: absolute; visibility: hidden; }
@@ -114,9 +113,9 @@
         <div class="fog-overlay"></div>
 
         <div id="intro">
-            <h1>appalachian brook trout</h1>
+            <h1>appalachian<br>brook<br>trout</h1>
             <button class="enter-btn" onclick="enterTheWoods()">[ enter the woods ]</button>
-            <p style="font-size:8px; opacity:0.3; margin-top:15px; letter-spacing: 2px;">(sound on)</p>
+            <p style="font-size:9px; opacity:0.3; margin-top:20px; letter-spacing: 3px;">(sound on)</p>
         </div>
 
         <div id="archive">
@@ -138,9 +137,7 @@
         var player;
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('yt-player', {
-                height: '1',
-                width: '1',
-                videoId: 'url-4QxhQ9o',
+                height: '1', width: '1', videoId: 'url-4QxhQ9o',
                 playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1, 'playlist': 'url-4QxhQ9o', 'playsinline': 1 },
                 events: { 'onReady': function(e) { e.target.mute(); e.target.playVideo(); } }
             });
@@ -151,7 +148,7 @@
             document.getElementById('archive').style.display = 'block';
             if (player) {
                 player.unMute();
-                player.setVolume(40);
+                player.setVolume(50);
                 player.playVideo();
             }
         }
