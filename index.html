@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>appalachian brook trout</title>
+    <style>
+        /* total reset for the girlies */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html {
+            background: #050505;
+            color: #d9d0c1;
+            font-family: "Courier New", monospace;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        /* the shrine container */
+        .gate {
+            max-width: 520px;
+            width: 90%;
+            padding: 70px 50px;
+            background: radial-gradient(circle at top, #0b0f0a 0%, #050505 70%);
+            border: 1px solid #2f3621;
+            box-shadow: 0 0 60px rgba(0,0,0,0.9), inset 0 0 40px rgba(0,0,0,0.8);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        /* the fog (she's moving!) */
+        .gate::before {
+            content: "";
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 140%;
+            height: 140%;
+            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
+            animation: fog 18s linear infinite;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        @keyframes fog {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-40px); }
+            100% { transform: translateX(0); }
+        }
+
+        h1 {
+            font-size: clamp(20px, 5vw, 30px);
+            letter-spacing: 5px;
+            opacity: 0.75;
+            margin-bottom: 45px;
+            text-shadow: 0 0 10px #000;
+        }
+
+        /* fixing the enter button toggle */
+        details summary {
+            list-style: none;
+            cursor: pointer;
+            outline: none;
+        }
+        details summary::-webkit-details-marker { display: none; }
+
+        .enter {
+            display: inline-block;
+            border: 1px solid #4a1c1c;
+            padding: 16px 40px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            font-size: 11px;
+            transition: all 0.6s ease;
+            color: #d9d0c1;
+        }
+        .enter:hover {
+            background: #4a1c1c;
+            color: #000;
+        }
+
+        /* the link reveal */
+        .archive {
+            margin-top: 60px;
+            animation: fadein 3s ease forwards;
+        }
+
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .haunted-link {
+            display: block;
+            margin: 22px 0;
+            font-size: 18px;
+            color: #d9d0c1;
+            text-decoration: none;
+            opacity: 0.55;
+            transition: all 0.6s ease;
+        }
+        .haunted-link:hover {
+            opacity: 1;
+            color: #7c0a0a;
+            letter-spacing: 7px;
+        }
+
+        .player { margin-top: 20px; border: none; }
+        
+        /* hiding the enter button once clicked (optional but chic) */
+        details[open] summary .enter { display: none; }
+        details[open] summary p { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="gate">
+    <h1>appalachian brook trout</h1>
+
+    <details>
+        <summary>
+            <div class="enter">[ enter the woods ]</div>
+            <p style="font-size:9px; opacity:0.35; margin-top:18px;">(sound on)</p>
+        </summary>
+
+        <div class="archive">
+            <a href="#" class="haunted-link">† instagram</a>
+            <a href="#" class="haunted-link">† spotify</a>
+            <a href="#" class="haunted-link">† tumblr</a>
+            <a href="#" class="haunted-link">† offerings</a>
+
+            <div class="player">
+                <iframe width="100%" height="80" scrolling="no" frameborder="no" allow="autoplay" 
+                    src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/yalk48/a-quick-one-before-the-eternal&color=%234a1c1c&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false">
+                </iframe>
+            </div>
+        </div>
+    </details>
+</div>
+
+</body>
+</html>
