@@ -5,114 +5,156 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>appalachian brook trout</title>
     <style>
+        /* standard reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        /* the void */
         body, html {
-            background: #050505; color: #d9d0c1;
+            background-color: #050505 !important;
+            color: #d9d0c1;
             font-family: "Courier New", monospace;
-            height: 100vh; display: flex;
-            align-items: center; justify-content: center;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             overflow: hidden;
         }
+
+        /* the actual gate box */
         .gate {
-            max-width: 520px; width: 90%; padding: 70px 50px;
-            background: radial-gradient(circle at top, #0b0f0a 0%, #050505 70%);
+            position: relative;
+            max-width: 500px;
+            width: 85%;
+            padding: 60px 40px;
+            background: radial-gradient(circle at top, #0b0f0a 0%, #050505 80%);
             border: 1px solid #2f3621;
-            box-shadow: 0 0 60px rgba(0,0,0,0.9), inset 0 0 40px rgba(0,0,0,0.8);
-            text-align: center; position: relative; overflow: hidden; z-index: 1;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9), inset 0 0 30px rgba(0,0,0,0.8);
+            text-align: center;
+            z-index: 10;
         }
-        .gate::before {
-            content: ""; position: absolute; top: -20%; left: -20%; width: 140%; height: 140%;
-            background: radial-gradient(circle, rgba(255,255,255,0.03) 0%, transparent 60%);
-            animation: fog 18s linear infinite; pointer-events: none; z-index: -1;
+
+        /* the fog (fixed animation) */
+        .fog-overlay {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 50%);
+            animation: fogMove 20s linear infinite;
+            pointer-events: none;
+            z-index: -1;
         }
-        @keyframes fog { 0% { transform: translateX(0); } 50% { transform: translateX(-40px); } 100% { transform: translateX(0); } }
-        h1 { font-size: clamp(20px, 5vw, 30px); letter-spacing: 5px; opacity: 0.75; margin-bottom: 45px; text-shadow: 0 0 10px #000; }
-        
+
+        @keyframes fogMove {
+            0% { transform: translate(0, 0); }
+            50% { transform: translate(-5%, 5%); }
+            100% { transform: translate(0, 0); }
+        }
+
+        h1 {
+            font-size: 24px;
+            letter-spacing: 6px;
+            text-transform: lowercase;
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        /* button vibes */
         .enter-btn {
-            display: inline-block; border: 1px solid #4a1c1c;
-            padding: 16px 40px; letter-spacing: 5px;
-            text-transform: uppercase; font-size: 11px;
-            cursor: pointer; transition: all 0.6s ease;
-            color: #d9d0c1; background: transparent;
-            outline: none;
+            background: transparent;
+            border: 1px solid #4a1c1c;
+            color: #d9d0c1;
+            padding: 15px 35px;
+            font-size: 10px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: 0.5s;
         }
-        .enter-btn:hover { background: #4a1c1c; color: #000; }
+        .enter-btn:hover {
+            background: #4a1c1c;
+            color: #000;
+        }
 
-        #archive { display: none; margin-top: 60px; animation: fadein 3s ease forwards; }
-        @keyframes fadein { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        
+        /* hidden archive */
+        #archive {
+            display: none;
+            margin-top: 40px;
+            animation: fadeIn 2s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         .haunted-link {
-            display: block; margin: 22px 0; font-size: 18px;
-            color: #d9d0c1; text-decoration: none; opacity: 0.55;
-            transition: all 0.6s ease;
+            display: block;
+            margin: 20px 0;
+            color: #d9d0c1;
+            text-decoration: none;
+            font-size: 16px;
+            opacity: 0.6;
+            transition: 0.4s;
         }
-        .haunted-link:hover { opacity: 1; color: #7c0a0a; letter-spacing: 7px; }
+        .haunted-link:hover {
+            opacity: 1;
+            color: #7c0a0a;
+            letter-spacing: 5px;
+        }
 
-        /* hidden but not "dead" to the browser */
-        #yt-player { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+        #yt-player { position: absolute; visibility: hidden; }
     </style>
 </head>
 <body>
 
-<div class="gate">
-    <div id="intro">
-        <h1>appalachian brook trout</h1>
-        <button class="enter-btn" onclick="enterTheWoods()">[ enter the woods ]</button>
-        <p style="font-size:9px; opacity:0.35; margin-top:18px;">(sound on)</p>
+    <div class="gate">
+        <div class="fog-overlay"></div>
+
+        <div id="intro">
+            <h1>appalachian brook trout</h1>
+            <button class="enter-btn" onclick="enterTheWoods()">[ enter the woods ]</button>
+            <p style="font-size:8px; opacity:0.3; margin-top:15px; letter-spacing: 2px;">(sound on)</p>
+        </div>
+
+        <div id="archive">
+            <a href="https://www.instagram.com/appalachianbrooktrout?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr" target="_blank" class="haunted-link">† instagram</a>
+            <a href="https://music.youtube.com/channel/UCIdw9hTTV9IcE5jUqVFBECQ?si=LyljXTzTjjD2noK2" target="_blank" class="haunted-link">† hymns</a>
+            <a href="YOUR_TUMBLR_URL" target="_blank" class="haunted-link">† tumblr</a>
+            <a href="YOUR_PAYPAL_URL" target="_blank" class="haunted-link">† offerings</a>
+        </div>
     </div>
 
-    <div id="archive">
-        <a href="https://www.instagram.com/appalachianbrooktrout?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr" target="_blank" class="haunted-link">† instagram</a>
-        <a href="https://music.youtube.com/channel/UCIdw9hTTV9IcE5jUqVFBECQ?si=LyljXTzTjjD2noK2" target="_blank" class="haunted-link">† hymns (yt music)</a>
-        <a href="YOUR_TUMBLR_URL" target="_blank" class="haunted-link">† tumblr</a>
-        <a href="YOUR_PAYPAL_URL" target="_blank" class="haunted-link">† offerings</a>
-    </div>
-</div>
+    <div id="yt-player"></div>
 
-<div id="yt-player"></div>
+    <script>
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-<script>
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-    var player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('yt-player', {
-            height: '1',
-            width: '1',
-            videoId: 'url-4QxhQ9o', // your specific song id
-            playerVars: {
-                'autoplay': 1,
-                'controls': 0,
-                'loop': 1,
-                'playlist': 'url-4QxhQ9o',
-                'playsinline': 1
-            },
-            events: {
-                'onReady': onPlayerReady
-            }
-        });
-    }
-
-    function onPlayerReady(event) {
-        // we start muted to bypass autoplay jail, then unmute on click
-        event.target.mute();
-        event.target.playVideo();
-    }
-
-    function enterTheWoods() {
-        document.getElementById('intro').style.display = 'none';
-        document.getElementById('archive').style.display = 'block';
-
-        if (player) {
-            player.unMute();
-            player.setVolume(50);
-            player.playVideo();
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('yt-player', {
+                height: '1',
+                width: '1',
+                videoId: 'url-4QxhQ9o',
+                playerVars: { 'autoplay': 1, 'controls': 0, 'loop': 1, 'playlist': 'url-4QxhQ9o', 'playsinline': 1 },
+                events: { 'onReady': function(e) { e.target.mute(); e.target.playVideo(); } }
+            });
         }
-    }
-</script>
 
+        function enterTheWoods() {
+            document.getElementById('intro').style.display = 'none';
+            document.getElementById('archive').style.display = 'block';
+            if (player) {
+                player.unMute();
+                player.setVolume(40);
+                player.playVideo();
+            }
+        }
+    </script>
 </body>
 </html>
