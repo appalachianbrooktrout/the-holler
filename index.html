@@ -34,6 +34,7 @@
             text-transform: uppercase; font-size: 11px;
             cursor: pointer; transition: all 0.6s ease;
             color: #d9d0c1; background: transparent;
+            outline: none;
         }
         .enter-btn:hover { background: #4a1c1c; color: #000; }
 
@@ -47,8 +48,8 @@
         }
         .haunted-link:hover { opacity: 1; color: #7c0a0a; letter-spacing: 7px; }
 
-        /* keep the video invisible but functional */
-        #yt-player { position: absolute; top: -9999px; left: -9999px; }
+        /* hidden but not "dead" to the browser */
+        #yt-player { position: absolute; top: 0; left: 0; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
     </style>
 </head>
 <body>
@@ -71,7 +72,6 @@
 <div id="yt-player"></div>
 
 <script>
-    // 1. Load the YouTube IFrame API
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -80,26 +80,35 @@
     var player;
     function onYouTubeIframeAPIReady() {
         player = new YT.Player('yt-player', {
-            height: '0',
-            width: '0',
-            // REPLACE THIS VIDEO ID with any YouTube video ID you want!
-            videoId: '9P_8pbgM8Vw', 
+            height: '1',
+            width: '1',
+            videoId: 'url-4QxhQ9o', // your specific song id
             playerVars: {
-                'autoplay': 0,
+                'autoplay': 1,
                 'controls': 0,
                 'loop': 1,
-                'playlist': '9P_8pbgM8Vw' // Required for looping
+                'playlist': 'url-4QxhQ9o',
+                'playsinline': 1
+            },
+            events: {
+                'onReady': onPlayerReady
             }
         });
     }
 
+    function onPlayerReady(event) {
+        // we start muted to bypass autoplay jail, then unmute on click
+        event.target.mute();
+        event.target.playVideo();
+    }
+
     function enterTheWoods() {
-        // Show the secret links
         document.getElementById('intro').style.display = 'none';
         document.getElementById('archive').style.display = 'block';
 
-        // START THE HYMN!
-        if (player && player.playVideo) {
+        if (player) {
+            player.unMute();
+            player.setVolume(50);
             player.playVideo();
         }
     }
