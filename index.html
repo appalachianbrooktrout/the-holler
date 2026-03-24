@@ -10,40 +10,28 @@
             background-color: #050505 !important;
             color: #d9d0c1;
             font-family: "Courier New", monospace;
-            height: 100vh;
-            width: 100vw;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            height: 100vh; width: 100vw;
+            display: flex; align-items: center; justify-content: center;
             overflow: hidden;
         }
 
         .gate {
             position: relative;
-            max-width: 500px;
-            width: 85%;
+            max-width: 500px; width: 85%;
             padding: 80px 40px;
             background: #050505;
             border: 2px solid #2f3621;
             box-shadow: 0 0 80px rgba(0,0,0,1), inset 0 0 60px rgba(0,0,0,1);
             text-align: center;
-            z-index: 10;
-            overflow: hidden;
+            z-index: 10; overflow: hidden;
         }
 
         .fog-overlay {
-            content: "";
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 40%),
                         radial-gradient(circle, rgba(255,255,255,0.05) 10%, transparent 60%);
             animation: fogMove 12s ease-in-out infinite;
-            pointer-events: none;
-            z-index: -1;
-            filter: blur(20px);
+            pointer-events: none; z-index: -1; filter: blur(20px);
         }
 
         @keyframes fogMove {
@@ -53,35 +41,24 @@
             100% { transform: translate(0, 0) scale(1); }
         }
 
-        h1 {
-            font-size: 28px;
-            letter-spacing: 8px;
-            line-height: 1.5;
-            margin-bottom: 50px;
-            text-transform: lowercase;
-            opacity: 0.9;
-        }
+        h1 { font-size: 28px; letter-spacing: 8px; line-height: 1.5; margin-bottom: 50px; text-transform: lowercase; opacity: 0.9; }
 
         .enter-btn {
-            background: transparent;
-            border: 1px solid #4a1c1c;
-            color: #d9d0c1;
-            padding: 18px 40px;
-            font-size: 11px;
-            letter-spacing: 5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: 0.6s;
-            outline: none;
+            background: transparent; border: 1px solid #4a1c1c; color: #d9d0c1;
+            padding: 18px 40px; font-size: 11px; letter-spacing: 5px;
+            text-transform: uppercase; cursor: pointer; transition: 0.6s; outline: none;
         }
         .enter-btn:hover { background: #4a1c1c; color: #000; }
 
-        /* THE LONGER FADE (4 seconds of haunting) */
+        /* THE LINE-UP RE-FIX */
         #archive {
             display: none;
-            margin-top: 50px;
+            margin: 50px auto 0 auto;
+            width: fit-content; /* this centers the block itself */
+            text-align: left; /* but makes the crosses inside line up vertically */
             animation: extraSlowFade 4s ease-in-out forwards;
         }
+
         @keyframes extraSlowFade { 
             0% { opacity: 0; transform: translateY(5px); }
             100% { opacity: 1; transform: translateY(0); }
@@ -95,12 +72,9 @@
             font-size: 18px;
             opacity: 0.5;
             transition: 0.8s;
+            white-space: nowrap; 
         }
-        .haunted-link:hover {
-            opacity: 1;
-            color: #7c0a0a;
-            letter-spacing: 6px;
-        }
+        .haunted-link:hover { opacity: 1; color: #7c0a0a; letter-spacing: 4px; }
 
         #yt-player { position: absolute; visibility: hidden; }
     </style>
@@ -117,9 +91,9 @@
         </div>
 
         <div id="archive">
-            <a href="https://www.instagram.com/appalachianbrooktrout?igsh=NTc4MTIwNjQ2YQ%3D%3D&utm_source=qr" target="_blank" class="haunted-link">† instagram</a>
-            <a href="https://music.youtube.com/channel/UCIdw9hTTV9IcE5jUqVFBECQ?si=LyljXTzTjjD2noK2" target="_blank" class="haunted-link">† hymns</a>
-            <a href="https://www.tiktok.com/@appalachianbrooktrout?_r=1&_t=ZP-94wqkOmDG7L" target="_blank" class="haunted-link">† prophecies (tiktok)</a>
+            <a href="https://www.instagram.com/appalachianbrooktrout" target="_blank" class="haunted-link">† instagram</a>
+            <a href="https://music.youtube.com/channel/UCIdw9hTTV9IcE5jUqVFBECQ" target="_blank" class="haunted-link">† hymns</a>
+            <a href="https://www.tiktok.com/@appalachianbrooktrout" target="_blank" class="haunted-link">† prophecies</a>
             <a href="YOUR_TUMBLR_URL" target="_blank" class="haunted-link">† tumblr</a>
             <a href="YOUR_PAYPAL_URL" target="_blank" class="haunted-link">† offerings</a>
         </div>
